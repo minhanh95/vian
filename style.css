@@ -24,6 +24,44 @@ canvas {
   position: fixed;
   z-index: 2;
 }
+.gradient-text {
+  background: linear-gradient(90deg, #ff5e62, #7e5bea);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.arrow-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 20px 10px 0 10px;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.click-text {
+  margin-right: 10px;
+  padding: 10px;
+  font-size: 18px;
+  color: #ffffff;
+  background-color: #4CAF50; /* Green background color */
+  border: 2px solid #ffffff; /* White border */
+  border-radius: 10px; /* Rounded corners */
+  transition: background-color 0.3s, transform 0.3s; /* Add smooth transition */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.click-text:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: scale(1.05); /* Scale up on hover */
+}
+
 /*-----------------------------------*\
   #style.css
 \*-----------------------------------*/

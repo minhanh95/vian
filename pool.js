@@ -1,4 +1,4 @@
-const { Engine, Render, World, Bodies, Mouse, MouseConstraint, Constraint } = Matter;
+const { Engine, Render, World, Bodies, Mouse, MouseConstraint, Events } = Matter;
 
 // Set up Matter.js engine
 const engine = Engine.create();
@@ -78,3 +78,19 @@ Engine.run(engine);
 
 // Run the renderer
 Render.run(render);
+
+// Listen for mousedown event
+Events.on(mouseConstraint, 'mousedown', function (event) {
+  const mousePosition = event.mouse.position;
+
+  // Find the clicked ball
+  const clickedBall = balls.find(ball => {
+    return Matter.Bounds.contains(ball.bounds, mousePosition);
+  });
+
+  if (clickedBall) {
+    // Apply an upward force to make the ball bounce
+    const bounceForce = { x: 0, y: -1 };
+    Matter.Body.applyForce(clickedBall, mousePosition, bounceForce);
+  }
+});
