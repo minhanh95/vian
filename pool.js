@@ -17,7 +17,7 @@ const render = Render.create({
 // Create boundaries for the box
 const boxWidth = window.innerWidth;
 const boxHeight = window.innerHeight;
-const boundaryThickness = 50;
+const boundaryThickness = 150;
 
 const boundaries = [
   // Top boundary
