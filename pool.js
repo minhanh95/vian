@@ -1,6 +1,6 @@
-const { Engine, Render, World, Bodies, Mouse, MouseConstraint } = Matter;
+const { Engine, Render, World, Bodies, Mouse, MouseConstraint, Constraint } = Matter;
 
-// Create an engine
+// Set up Matter.js engine
 const engine = Engine.create();
 
 // Create a renderer
@@ -14,16 +14,31 @@ const render = Render.create({
   }
 });
 
-// Create ground
-const ground = Bodies.rectangle(window.innerWidth / 2, window.innerHeight - 10, window.innerWidth, 20, { isStatic: true });
-World.add(engine.world, ground);
+// Create boundaries for the box
+const boxWidth = window.innerWidth;
+const boxHeight = window.innerHeight;
+const boundaryThickness = 50;
+
+const boundaries = [
+  // Top boundary
+  Bodies.rectangle(boxWidth / 2, -boundaryThickness / 2, boxWidth + 2 * boundaryThickness, boundaryThickness, { isStatic: true }),
+  // Bottom boundary
+  Bodies.rectangle(boxWidth / 2, boxHeight + boundaryThickness / 2, boxWidth + 2 * boundaryThickness, boundaryThickness, { isStatic: true }),
+  // Left boundary
+  Bodies.rectangle(-boundaryThickness / 2, boxHeight / 2, boundaryThickness, boxHeight + 2 * boundaryThickness, { isStatic: true }),
+  // Right boundary
+  Bodies.rectangle(boxWidth + boundaryThickness / 2, boxHeight / 2, boundaryThickness, boxHeight + 2 * boundaryThickness, { isStatic: true })
+];
+
+// Add boundaries to the world
+World.add(engine.world, boundaries);
 
 // Create balls with random positions and speeds
 const balls = [];
 for (let i = 0; i < 20; i++) {
   const ball = Bodies.circle(
-    Math.random() * window.innerWidth,
-    Math.random() * window.innerHeight,
+    Math.random() * (boxWidth - 2 * boundaryThickness) + boundaryThickness,
+    Math.random() * (boxHeight - 2 * boundaryThickness) + boundaryThickness,
     30,
     {
       restitution: 0.9,
@@ -54,9 +69,6 @@ const mouseConstraint = MouseConstraint.create(engine, {
 
 // Add mouse interaction
 World.add(engine.world, mouseConstraint);
-
-
-
 
 // Keep the mouse in sync with rendering
 render.mouse = mouse;
