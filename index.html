@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>ViAn</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <canvas id="myCanvas"></canvas>
-  <section class="centered-text" id="home" aria-label="home">
-    <div class="container">
-      <div class="hero-content">
-        <h1 class="h1 hero-title gradient-text">Vi An</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Be My Valentine</title>
+    <link rel="stylesheet" href="css/valentine.css" />
+  </head>
+  <body>
+    <div id="valentineQuestion"><b>Will you be my valentine?</b></div>
+    <button class="answerButton" onclick="location.href='thankyou.html'">
+      Yes
+    </button>
+    <button class="answerButton" id="noButton">I no no wanna o(╥﹏╥)o</button>
+    <br />
+    <img src="cat.gif" alt="cat asking question" class="responsive" />
 
-        <div class="wrapper h2">
-          <strong class="strong" data-letter-effect>Art Director</strong>
-        </div>
-        <p class="hero-text">0 Years Of Experience</p>
-
-      </div>
-
-    </div>
-    <div class="arrow-container">
-      <p class="click-text" id="clickText">Click the ball 😊</p>
-    </div>
-    
-  </section>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
-  <script src="pool.js"></script>
-  <script src="script.js"></script>
-  
-</body>
+    <script>
+      document
+        .getElementById("noButton")
+        .addEventListener("click", function () {
+          var yesButton = document.querySelector(
+            'button[onclick*="thankyou.html"]'
+          );
+          var currentFontSize = parseInt(
+            window.getComputedStyle(yesButton).fontSize
+          );
+          yesButton.style.fontSize = currentFontSize + 10 + "px"; // Increase font size by 5px
+        });
+    </script>
+  </body>
 </html>
